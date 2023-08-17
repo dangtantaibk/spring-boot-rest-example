@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping(value = "/v1/wishes")
+@RequestMapping(value = "/api/v1/wishes")
 @Api(tags = {"wish"})
 public class WishController extends AbstractRestHandler {
 
