@@ -30,7 +30,6 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(apiInfo());
     }
-    
 
     private ApiInfo apiInfo() {
         String description = "REST example";
