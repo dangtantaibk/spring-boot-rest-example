@@ -4,6 +4,7 @@ import com.taidang.example.domain.Hotel;
 import com.taidang.example.domain.Wish;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -11,4 +12,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface WishRepository extends PagingAndSortingRepository<Wish, Long> {
     Page findAll(Pageable pageable);
+
+    Page findAll(Sort sort);
 }

@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,9 @@ public class WishController extends AbstractRestHandler {
     @ApiOperation(value = "Create a wish resource.", notes = "Returns the URL of the new resource in the Location header.")
     public void create(@RequestBody Wish wish,
                                  HttpServletRequest request, HttpServletResponse response) {
+        if (StringUtils.isEmpty(wish.getName()) || StringUtils.isEmpty(wish.getDescription())) {
+            throw new DataFormatException("Bạn chưa nhập đủ thông tin");
+        }
         Wish created = this.wishService.create(wish);
         response.setHeader("Location", request.getRequestURL().append("/").append(created.getId()).toString());
     }

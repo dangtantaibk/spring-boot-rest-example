@@ -9,7 +9,11 @@ import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 /*
  * Sample service to demonstrate what the API would use to get things done
@@ -48,9 +52,10 @@ public class WishService {
     }
 
     public Page<Wish> getAll(Integer page, Integer size) {
-        Page pages = wishRepository.findAll(new PageRequest(page, size));
+        Page pages = wishRepository.findAll(new PageRequest(page, size, new Sort(Sort.Direction.DESC, "id")));
+
         // example of adding to the /metrics
-        if (size > 50) {
+        if (size > 100) {
             counterService.increment("taidang.WishService.getAll.largePayload");
         }
         return pages;
